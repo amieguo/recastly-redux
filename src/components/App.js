@@ -14,8 +14,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      videos: [],
-      currentVideo: null
+      videos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
     };
   }
 
