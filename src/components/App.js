@@ -9,56 +9,68 @@ import changeVideoList from '../actions/videoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 import store from '../store/store.js';
 
+// const App = () => (
+//   <div>
+//     <div className="row"> 
+//       <div className="col-md-7"> 
+//           <VideoPlayer />
+//           <div className="col-md-5"> 
+//             <VideoList />
+//           </div>
+//         </div>
+//     </div>
+//   </div>
+
+
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      videos: exampleVideoData,
-      currentVideo: exampleVideoData[0]
-    };
+//     this.state = {
+//       videos: exampleVideoData,
+//       currentVideo: exampleVideoData[0]
+//     };
   }
 
-  componentDidMount() {
-    this.getYouTubeVideos('react tutorials');
+  componentWillMount() {
+    store.dispatch(changeVideo(exampleVideoData[0]));
+    store.dispatch(changeVideoList(exampleVideoData));
   }
 
-  handleVideoListEntryTitleClick(video) {
-    this.setState({currentVideo: video});
-  }
+//   handleVideoListEntryTitleClick(video) {
+//     this.setState({currentVideo: video});
+//   }
 
-  getYouTubeVideos(query) {
-    var options = {
-      key: this.props.API_KEY,
-      query: query
-    };
+//   getYouTubeVideos(query) {
+//     var options = {
+//       key: this.props.API_KEY,
+//       query: query
+//     };
 
-    this.props.searchYouTube(options, (videos) =>
-      this.setState({
-        videos: videos,
-        currentVideo: videos[0]
-      })
-    );
-  }
+//     this.props.searchYouTube(options, (videos) =>
+//       this.setState({
+//         videos: videos,
+//         currentVideo: videos[0]
+//       })
+//     );
+//   }
 
-  //TODO: swap out the React components below for the container components
-  //  you wrote in the 'containers' directory.
-  render() {
-    return (
-      <div>
-        <Nav handleSearchInputChange={this.getYouTubeVideos.bind(this)}/>
-        <div className="row">
-          <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}/>
+//   //TODO: swap out the React components below for the container components
+//   //  you wrote in the 'containers' directory.
+      render() {
+        return (
+          <div>
+            <Nav />
+            <div className="row">
+              <div className="col-md-7">
+            <VideoPlayerContainer/>
           </div>
           <div className="col-md-5">
-            <VideoList
-              handleVideoListEntryTitleClick={this.handleVideoListEntryTitleClick.bind(this)}
-              videos={this.state.videos}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+            <VideoListContainer/>
+            </div>
+         </div>
+       </div>
+     );
+   }
+ }
