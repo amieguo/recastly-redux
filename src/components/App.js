@@ -33,7 +33,7 @@ export default class App extends React.Component {
 //     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     store.dispatch(changeVideo(exampleVideoData[0]));
     store.dispatch(changeVideoList(exampleVideoData));
   }
